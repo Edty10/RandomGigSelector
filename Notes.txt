@@ -1,0 +1,18 @@
+Once delay > 1 rand stop.
+delay = 0 inc slowly
+rate increases by number of iterations but inv delay
+speed = 100
+i = 0
+coin = False
+
+speed_round = round(speed)
+top = speed_round + i
+#bottom = i
+r = random.randint(bottom,top) / speed_round
+i = i + 1
+
+if delay > 1:
+top = 100 * (delay - 1)
+r = random.randint(0,top)
+if r > 50
+coin = True
