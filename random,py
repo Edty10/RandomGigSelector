@@ -1,0 +1,21 @@
+from sre_compile import isstring
+import time, random
+
+delay = 0
+speed = 5
+def other(speed, delay):
+    while speed > 0:
+        if round(speed) == 0:
+             top = 1
+        else:
+             top = round(speed)
+        r = random.randint(0,(round(speed)+1)) / (round(speed)+1)
+        delay = delay + r
+        time.sleep(delay)
+        speed = speed - r
+        print("R: " + str(r) + "\nDelay: " + str(delay) + "\nSpeed:" + str(speed))
+
+while type(speed) != str and type(delay) != str:
+    other(speed, delay)
+    delay = input("Delay:")
+    speed = input("Speed:")
