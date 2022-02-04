@@ -2,20 +2,36 @@ from sre_compile import isstring
 import time, random
 
 delay = 0
-speed = 5
+speed = 100
+
 def other(speed, delay):
-    while speed > 0:
-        if round(speed) == 0:
-             top = 1
-        else:
-             top = round(speed)
-        r = random.randint(0,(round(speed)+1)) / (round(speed)+1)
+    i = 0
+    coin = False
+    while delay < 0.5:
+        speed_round = round(speed)
+        top = speed_round + i
+        bottom = i
+        r = random.randint(bottom,top) / (speed * (top))
+        if delay > 0.3:
+            r = r * (10 * delay)
         delay = delay + r
         time.sleep(delay)
-        speed = speed - r
+        speed = speed - (10 * r)
+        i = i + 1
         print("R: " + str(r) + "\nDelay: " + str(delay) + "\nSpeed:" + str(speed))
+        if delay > 0.3:
+            top = round(100 * (delay - 0.3))
+            r = random.randint(0,top)
+            print(r)
+            if r > 50:
+                coin = True
+                print(coin)
+                speed = 0
 
 while type(speed) != str and type(delay) != str:
     other(speed, delay)
-    delay = input("Delay:")
-    speed = input("Speed:")
+    i = 5
+    while i > 0:
+        print(i)
+        time.sleep(1)
+        i = i - 1

@@ -20,6 +20,28 @@ def prRow(row):
 top = "_\n__\n___\n____\n_____\n______\n_______\n________\n_________\n__________\n___________\n____________\n_____________\n______________"
 bottom = "‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾\n‾‾‾‾‾‾\n‾‾‾‾‾\n‾‾‾‾\n‾‾‾\n‾‾\n‾"
 
+def other(speed, delay):
+    i = 0
+    coin = False
+    while delay < 0.5:
+        speed_round = round(speed)
+        top = speed_round + i
+        bottom = i
+        r = random.randint(bottom,top) / (speed * (top))
+        if delay > 0.3:
+            r = r * (10 * delay)
+        delay = delay + r
+        time.sleep(delay)
+        speed = speed - (10 * r)
+        i = i + 1
+        draw("TEST")
+        if delay > 0.3:
+            top = round(100 * (delay - 0.3))
+            r = random.randint(0,top)
+            if r > 50:
+                coin = True
+                speed = 0
+
 def draw(output):
     increase = True
     lineNo = 0
@@ -43,7 +65,6 @@ def draw(output):
             increase = False
         elif lineNo > 0:
             print(Line)
-        #Add a time.sleep
 
 loop = True
 box = "loop"
@@ -51,8 +72,7 @@ launch = ["go","launch","g","Go","Go!","go!"]
 while loop:
     box = input()
     if box == "go":
-        speed = 5
-        while speed >0:
-            output = "test"
-            draw(output)
-            #add speed slower
+        other(100,0)
+        print("Bing!")
+    if box == "stop":
+        loop = False
