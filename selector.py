@@ -5,7 +5,7 @@ with open('Gigs.csv') as file:
 
 header = content[:1]
 rows = content[1:]
-rowNo = len(rows)
+rowNo = len(rows) - 1
 
 def prRow(row):
     thisRow = rows[row]
@@ -16,6 +16,14 @@ def prRow(row):
     Day = thisRow[3]
     Date = thisRow[4]
     Support = thisRow[5]
+    if type(Support) == str and len(Support) > 1:
+        output = "Venue: " + Venue + ", Artist: " + Artist + " supported by " + Support
+    elif type(Support) == str and Support == "TBC":
+        output = "Venue: " + Venue + ", Artist: " + Artist + " support TBC"
+    else:
+        output = "Venue: " + Venue + ", Artist: " + Artist + "\n"
+    output = output + Day + " " + Date + "\n" + Price
+    return Artist, Venue, Price, Day, Date, Support, output
 
 top = "_\n__\n___\n____\n_____\n______\n_______\n________\n_________\n__________\n___________\n____________\n_____________\n______________"
 bottom = "‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾‾\n‾‾‾‾‾‾‾\n‾‾‾‾‾‾\n‾‾‾‾‾\n‾‾‾‾\n‾‾‾\n‾‾\n‾"
@@ -34,13 +42,16 @@ def other(speed, delay):
         time.sleep(delay)
         speed = speed - (10 * r)
         i = i + 1
-        draw("TEST")
+        row = random.randint(0, rowNo)
+        Artist, Venue, Price, Day, Date, Support, output = prRow(row)
+        draw(output)
         if delay > 0.3:
             top = round(100 * (delay - 0.3))
             r = random.randint(0,top)
             if r > 50:
                 coin = True
                 speed = 0
+
 
 def draw(output):
     increase = True

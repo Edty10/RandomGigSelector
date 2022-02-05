@@ -1,3 +1,6 @@
-row = randint (0,rowNo)
-prRow(row)
-print in prRow?
+reduce to 14 or 13
+Artist on new row
+
+While not(acceptale)
+if price > 0
+if venue  == input 
