@@ -1,6 +1,10 @@
-reduce to 14 or 13
-Artist on new row
+I'm going to have to deal with the dates...
+Does > and < work?
+Probably need a "before" and "after" or "include" and "exclude" specifc
 
-While not(acceptale)
-if price > 0
-if venue  == input 
+Need to whitelist venues in a, blacklist venues in b
+
+Price will be max only because I'm lazy
+if price is "what's wrong" then prices (should probably be renamed maxPrice) = Price (sets as new max)
+
+Use not in rather than iterative ifs
