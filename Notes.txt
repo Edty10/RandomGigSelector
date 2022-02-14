@@ -4,7 +4,11 @@ Probably need a "before" and "after" or "include" and "exclude" specifc
 
 Need to whitelist venues in a, blacklist venues in b
 
+Make a list of rows done, if that == list then except
+
 Price will be max only because I'm lazy
 if price is "what's wrong" then prices (should probably be renamed maxPrice) = Price (sets as new max)
 
 Use not in rather than iterative ifs
+
+Could have a "repeat counter" and if == 0 then re:print commands
