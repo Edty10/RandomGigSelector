@@ -31,7 +31,7 @@ def convert(Price):
 
 def conv(Date):
     date = Date.split("/")
-    date = datetime.datetime(int(date[2]),int(date[1]),int(date[0]))
+    date = datetime.date(int(date[2]),int(date[1]),int(date[0]))
     return date
 
 def draw(output):
@@ -83,19 +83,35 @@ def other(speed, delay):
             Artist, Venue, Price, Day, Date, Support, output = prRow(row)
             date = conv(Date)
             if not row in rowsTried:
-                acceptable = True # All following statements should return in false
+                acceptable = True # All following statements should return in false, could be a function tbh
                 if len(venue_A) > 0 and not Venue in venue_A: #A good example of the Acceptable Conditions
+                    acceptable = False
+                if len(venue_B) > 0 and Venue in venue_B:
+                    acceptable = False
+                if len(day_A) > 0 and not Day in day_A: 
+                    acceptable = False
+                if len(day_B) > 0 and Day in day_B:
+                    acceptable = False
+                if len(date_A) > 0 and not Date in date_A: 
+                    acceptable = False
+                if len(date_B) > 0 and Date in date_B:
                     acceptable = False
                 if price_Max > 0.0:
                     if convert(Price) > price_Max:
                         acceptable = False
-                if len(venue_B) > 0 and Venue in venue_B:
+                if isinstance(date_Max, datetime.date):
+                    if conv(Date) > date_Max:
+                        acceptable = False
+                if isinstance(date_Min, datetime.date):
+                    if conv(Date) < date_Min:
+                        acceptable = False
+                if conv(Date) < datetime.date.today():
                     acceptable = False
                 if row in rowList:
                     acceptable = False
             if acceptable:
                 end = True
-            else:
+            elif not row in rowsTried: # something is wrong here but I don't know what yet
                 rowsTried.append(row)
                 if len(rowsTried) >= rowNo:
                     print("We've tried all the options, and none of them fit your critera, sorry!")
@@ -141,8 +157,8 @@ day_A = []
 day_B = []
 date_A = [] 
 date_B = []
-date_Max = None # if date_Max is not None
-date_Min = None
+date_Max = False
+date_Min = False
 price_Max = 0.0
 print("If you would like to make a list of acceptable date(s) or venue(s), type \"Add\".")
 print("If you would like to ban a particular venue(s) or date(s) type \"Ban\".")
