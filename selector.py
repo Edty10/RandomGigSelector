@@ -111,9 +111,9 @@ def other(speed, delay):
                     acceptable = False
             if acceptable:
                 end = True
-            elif not row in rowsTried: # something is wrong here but I don't know what yet
+            elif not row in rowsTried:
                 rowsTried.append(row)
-                if len(rowsTried) >= rowNo:
+                if len(rowsTried) > rowNo:
                     print("We've tried all the options, and none of them fit your critera, sorry!")
                     raise SystemExit
         draw(output)
