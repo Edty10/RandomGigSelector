@@ -114,8 +114,7 @@ def other(speed, delay):
             elif not row in rowsTried:
                 rowsTried.append(row)
                 if len(rowsTried) > rowNo:
-                    print("We've tried all the options, and none of them fit your critera, sorry!")
-                    raise SystemExit
+                    return None, None, None, None, None, None, -1
         draw(output)
         if delay > 0.3:
             top = round(100 * (delay - 0.3))
@@ -319,7 +318,28 @@ while loop:
         state = "RUNNING"
         Artist, Venue, Price, Day, Date, Support, row = other(100,0)
         state = "OUTPUT"
-        print("Is this ok?")
+        if row == -1:
+            print("We've tried all the options, and none of them fit your critera, sorry!")
+            End = False
+            while not End:
+                print("I'm afraid there's no other option, would you like to reset?")
+                box = input("Y/N?   ")
+                if box == "Y":
+                    rowList = []
+                    state = "START"
+                    rowList = venue_A = venue_B = day_A = day_B = date_A = date_B = []
+                    date_Max = date_Min = False
+                    price_Max = 0.0
+                    End = True
+                elif box == "N":
+                    print("Aright then, suit yourself!")
+                    loop = False
+                    print("LOL")
+                    End = True
+                else:
+                    print("I'm sorry, it has to be either \"Y\" or \"N\".")
+        else:
+            print("Is this ok?")
     if box in no and row != -1: # This handles an early no. Could me moved up with an If state 
         rowList.append(row)
         if len(rowList) >= rowNo:
@@ -330,6 +350,9 @@ while loop:
                 if box == "Y":
                     rowList = []
                     state = "START"
+                    rowList = venue_A = venue_B = day_A = day_B = date_A = date_B = []
+                    date_Max = date_Min = False
+                    price_Max = 0.0
                     End = True
                 elif box == "N":
                     print("Aright then, suit yourself!")
